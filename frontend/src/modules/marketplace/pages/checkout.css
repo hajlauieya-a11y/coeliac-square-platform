@@ -1,0 +1,325 @@
+/* checkout.css */
+.checkout-page {
+  background-color: #f9f9f9;
+  min-height: 100vh;
+  padding: 40px 20px;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+}
+
+.checkout-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  gap: 32px;
+  flex-wrap: wrap;
+}
+
+/* Section gauche - Formulaire */
+.checkout-form-section {
+  flex: 1;
+  min-width: 300px;
+  background: white;
+  border-radius: 12px;
+  padding: 32px 40px 40px 40px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+}
+
+.checkout-title {
+  font-size: 24px;
+  font-weight: 400;
+  margin-bottom: 32px;
+  color: #111;
+  letter-spacing: -0.3px;
+}
+
+.form-section {
+  margin-bottom: 32px;
+}
+
+.form-section h2 {
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 20px;
+  color: #111;
+  letter-spacing: -0.2px;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-group label {
+  display: block;
+  font-size: 13px;
+  font-weight: 500;
+  margin-bottom: 6px;
+  color: #333;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 12px 0;
+  border: none;
+  border-bottom: 1px solid #e0e0e0;
+  font-size: 14px;
+  background: transparent;
+  transition: border-color 0.2s;
+  font-family: inherit;
+}
+
+.form-group input:focus {
+  outline: none;
+  border-bottom-color: #000;
+}
+
+.form-row {
+  display: flex;
+  gap: 24px;
+  margin-bottom: 20px;
+}
+
+.form-row .form-group {
+  flex: 1;
+  margin-bottom: 0;
+}
+
+/* Livraison */
+.delivery-options {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.delivery-option {
+  display: flex;
+  align-items: center;
+  padding: 0;
+  cursor: pointer;
+  background: transparent;
+  margin: 0;
+}
+
+.delivery-option input[type="radio"] {
+  width: 18px;
+  height: 18px;
+  margin-right: 14px;
+  accent-color: #000;
+  cursor: pointer;
+}
+
+.delivery-option-content {
+  flex: 1;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.delivery-text strong {
+  display: block;
+  font-size: 14px;
+  font-weight: 500;
+  color: #111;
+  margin-bottom: 4px;
+}
+
+.delivery-note {
+  font-size: 12px;
+  color: #888;
+  font-weight: 400;
+}
+
+.delivery-price {
+  font-weight: 500;
+  color: #111;
+  font-size: 14px;
+}
+
+/* Lien retour panier */
+.return-link {
+  margin-top: 40px;
+  text-align: left;
+}
+
+.return-link a {
+  color: #888;
+  text-decoration: none;
+  font-size: 13px;
+  transition: color 0.2s;
+}
+
+.return-link a:hover {
+  color: #111;
+  text-decoration: underline;
+}
+
+/* Section droite - Résumé */
+.checkout-summary-section {
+  width: 360px;
+  background: transparent;
+  border-radius: 0;
+  padding: 0;
+  align-self: flex-start;
+}
+
+.summary-title {
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 24px;
+  color: #111;
+  display: none; /* Caché car l'image n'a pas de titre "Your Curation" explicite dans la carte, mais on garde le contenu */
+}
+
+/* En-tête de la section résumé - style "Your Curation" */
+.checkout-summary-section .summary-title {
+  display: block;
+  font-size: 16px;
+  font-weight: 500;
+  margin-bottom: 20px;
+  color: #111;
+}
+
+.cart-items {
+  margin-bottom: 24px;
+  background: white;
+  border-radius: 12px;
+  padding: 24px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+}
+
+.cart-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 16px 0;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.cart-item:first-child {
+  padding-top: 0;
+}
+
+.cart-item:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.cart-item-info {
+  flex: 1;
+}
+
+.cart-item-name {
+  font-size: 14px;
+  font-weight: 500;
+  margin-bottom: 4px;
+  color: #111;
+}
+
+.cart-item-meta {
+  font-size: 11px;
+  color: #aaa;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+}
+
+.cart-item-price {
+  font-size: 14px;
+  font-weight: 500;
+  margin-left: 16px;
+  color: #111;
+}
+
+.price-details {
+  background: white;
+  border-radius: 12px;
+  padding: 24px;
+  margin-top: 16px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+}
+
+.price-row {
+  display: flex;
+  justify-content: space-between;
+  font-size: 14px;
+  color: #555;
+  margin-bottom: 12px;
+}
+
+.price-row.total {
+  font-size: 18px;
+  font-weight: 500;
+  color: #111;
+  margin-top: 16px;
+  padding-top: 16px;
+  border-top: 1px solid #eee;
+}
+
+/* Bouton Secure Checkout */
+.checkout-btn {
+  width: 100%;
+  padding: 16px;
+  background: #1a1a1a;
+  color: white;
+  border: none;
+  border-radius: 30px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  margin: 20px 0 12px 0;
+  font-family: inherit;
+  transition: background 0.2s;
+}
+
+.checkout-btn:hover {
+  background: #333;
+}
+
+.secure-note {
+  text-align: center;
+  font-size: 11px;
+  color: #aaa;
+  margin-top: 8px;
+}
+
+.secure-note span {
+  margin-right: 4px;
+}
+
+.empty-cart {
+  padding: 40px;
+  text-align: center;
+}
+
+.empty-cart h1 {
+  margin-bottom: 16px;
+}
+
+.empty-cart button {
+  padding: 12px 24px;
+  background: #1a1a1a;
+  color: white;
+  border: none;
+  border-radius: 30px;
+  cursor: pointer;
+  margin-top: 16px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .checkout-container {
+    flex-direction: column;
+  }
+  
+  .checkout-summary-section {
+    width: 100%;
+  }
+  
+  .form-row {
+    flex-direction: column;
+    gap: 20px;
+  }
+  
+  .checkout-form-section {
+    padding: 24px;
+  }
+}
