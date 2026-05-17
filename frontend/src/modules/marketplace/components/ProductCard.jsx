@@ -1,9 +1,9 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { useCart } from "../../../context/CartContext";
+import { useCart } from "../context/CartContext";
 
 export default function ProductCard({
-  id,
+  _id,
   category,
   name,
   description,
@@ -15,7 +15,7 @@ export default function ProductCard({
   const { addToCart } = useCart();
 
   const product = {
-    id,
+    _id,
     category,
     name,
     description,
@@ -30,7 +30,7 @@ export default function ProductCard({
 
       {/* Clickable area (go to product page) */}
       <Link
-        to={`/product/${id}`}
+        to={`/product/${_id}`}
         style={{ textDecoration: "none", color: "inherit" }}
       >
         {image ? (

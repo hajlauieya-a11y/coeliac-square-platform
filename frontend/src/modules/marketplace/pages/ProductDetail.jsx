@@ -1,21 +1,25 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import Header from "../components/Header";
-import Footer from "../components/Footer";
-import "../../../index.css";
+import Header from "../../shared/components/layout/Header.jsx";
+import Footer from "../../shared/components/layout/Footer.jsx";
+import "../../../app/index.css";
+import { getProductById } from "../services/marketplace.service";
+import { useCart } from "../context/CartContext";
+
 
 export default function ProductDetail() {
   const { id } = useParams();
 
   const [product, setProduct] = useState(null);
   const [qty, setQty] = useState(1);
+  const { addToCart } = useCart();
 
   useEffect(() => {
-    fetch(`http://localhost:5000/api/products/${id}`)
-      .then((res) => res.json())
-      .then((data) => setProduct(data))
-      .catch((err) => console.error(err));
-  }, [id]);
+  getProductById(id)
+    .then((res) => setProduct(res.data))
+    .catch((err) => console.error(err));
+}, [id]);
+
 
   if (!product) {
     return <h2 style={{ padding: "40px" }}>Loading product...</h2>;
@@ -67,9 +71,13 @@ export default function ProductDetail() {
               </button>
             </div>
 
-            <button className="cs-add-bag">
-              Add {qty} to Bag
-            </button>
+            <button
+                        className="cs-add-bag"
+                        onClick={() => addToCart(product, qty)}
+                      >
+                        Add {qty} to Bag
+                      </button>
+
           </div>
         </div>
       </section>

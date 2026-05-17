@@ -1,4 +1,4 @@
-import React from "react"
+import React from "react";
 
 export default function Footer() {
   return (
@@ -14,6 +14,7 @@ export default function Footer() {
           </div>
           <p>Book your trip in minute, get full Control for much longer.</p>
         </div>
+
         <div>
           <h5>Company</h5>
           <ul>
@@ -22,6 +23,7 @@ export default function Footer() {
             <li><a href="#">Mobile</a></li>
           </ul>
         </div>
+
         <div>
           <h5>Contact</h5>
           <ul>
@@ -30,6 +32,7 @@ export default function Footer() {
             <li><a href="#">Affilates</a></li>
           </ul>
         </div>
+
         <div>
           <h5>More</h5>
           <ul>
@@ -38,6 +41,7 @@ export default function Footer() {
             <li><a href="#">Low fare tips</a></li>
           </ul>
         </div>
+
         <div>
           <div className="cs-social">
             <a href="#">f</a>
@@ -51,9 +55,10 @@ export default function Footer() {
           </div>
         </div>
       </div>
+
       <div className="cs-footer-bottom">
         All rights reserved@coeliacsquare.com
       </div>
     </footer>
-  )
+  );
 }

@@ -1,0 +1,18 @@
+.admin-recipe-helper {
+  color: #6b6b6b;
+  font-size: 13px;
+  line-height: 1.5;
+  margin-top: 6px;
+}
+
+.admin-checkbox {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 46px;
+}
+
+.admin-checkbox input {
+  width: 18px;
+  height: 18px;
+}

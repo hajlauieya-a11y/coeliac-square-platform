@@ -1,5 +1,7 @@
 import React from "react";
-import { useCart } from "../../../context/CartContext";import { Link } from "react-router-dom";
+import { Link } from "react-router-dom";
+import { useCart } from "../context/CartContext";
+import "./cart.css";
 
 export default function Cart() {
   const {
@@ -10,71 +12,72 @@ export default function Cart() {
     clearCart,
   } = useCart();
 
-  const total = cart.reduce(
-    (sum, item) => sum + item.price * item.qty,
-    0
-  );
+  const total = cart.reduce((sum, item) => sum + item.price * item.qty, 0);
 
   return (
-    <div style={{ padding: "40px", maxWidth: "900px", margin: "0 auto" }}>
-      <h1 style={{ marginBottom: "20px" }}>Your Cart 🛒</h1>
+    <div className="cart-page">
+      <div className="cart-shell">
+        <div className="cart-header">
+          <h1 className="cart-title">Your Cart</h1>
+          <span className="cart-count">
+            {cart.length} item{cart.length === 1 ? "" : "s"}
+          </span>
+        </div>
 
-      {cart.length === 0 ? (
-        <p>Your cart is empty</p>
-      ) : (
-        <>
-          {cart.map((item) => (
-            <div
-              key={item.id}
-              style={{
-                display: "flex",
-                justifyContent: "space-between",
-                alignItems: "center",
-                borderBottom: "1px solid #ddd",
-                padding: "15px 0",
-              }}
-            >
-              {/* PRODUCT INFO */}
-              <div>
-                <h3 style={{ margin: 0 }}>{item.name}</h3>
-                <p style={{ margin: "5px 0" }}>
-                  {item.price} DT × {item.qty}
-                </p>
-              </div>
-
-              {/* QTY CONTROLS */}
-              <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
-                <button onClick={() => decreaseQty(item.id)}>-</button>
-                <span>{item.qty}</span>
-                <button onClick={() => increaseQty(item.id)}>+</button>
-              </div>
-
-              {/* REMOVE */}
-              <button onClick={() => removeFromCart(item.id)}>
-                Remove
-              </button>
-            </div>
-          ))}
-
-          <hr style={{ margin: "20px 0" }} />
-
-          {/* TOTAL */}
-          <h2>Total: {total.toFixed(2)} DT</h2>
-
-          {/* ACTIONS */}
-          <div style={{ display: "flex", gap: "10px", marginTop: "20px" }}>
-            <button onClick={clearCart}>
-              Clear Cart
-            </button>
-
-            <Link to="/checkout">
-              <button style={{ background: "black", color: "white" }}>
-                Checkout
-              </button>
+        {cart.length === 0 ? (
+          <div className="cart-empty">
+            <p>Your cart is empty</p>
+            <Link to="/marketplace" className="cart-empty-link">
+              <button className="cart-btn cart-btn-primary">Continue Shopping</button>
             </Link>
           </div>
-        </>
-      )}
+        ) : (
+          <>
+            <div className="cart-list">
+              {cart.map((item) => (
+                <div key={item._id} className="cart-row">
+                  <div>
+                    <h3 className="cart-product-name">{item.name}</h3>
+                    <p className="cart-product-meta">
+                      {item.price} DT x {item.qty}
+                    </p>
+                  </div>
+
+                  <div className="cart-qty">
+                    <button onClick={() => decreaseQty(item._id)}>-</button>
+                    <span>{item.qty}</span>
+                    <button onClick={() => increaseQty(item._id)}>+</button>
+                  </div>
+
+                  <button
+                    className="cart-remove"
+                    onClick={() => removeFromCart(item._id)}
+                  >
+                    Remove
+                  </button>
+                </div>
+              ))}
+            </div>
+
+            <div className="cart-summary">
+              <div>
+                <div className="cart-total-label">Total</div>
+                <div className="cart-total">{total.toFixed(2)} DT</div>
+              </div>
+
+              <div className="cart-actions">
+                <button className="cart-btn cart-btn-secondary" onClick={clearCart}>
+                  Clear Cart
+                </button>
+
+                <Link to="/checkout" className="cart-checkout-link">
+                  <button className="cart-btn cart-btn-primary">Checkout</button>
+                </Link>
+              </div>
+            </div>
+          </>
+        )}
+      </div>
     </div>
   );
 }

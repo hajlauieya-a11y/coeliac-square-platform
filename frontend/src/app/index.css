@@ -89,6 +89,22 @@
   color: var(--cs-text);
 }
 
+.cs-dashboard-btn {
+  background: var(--cs-green);
+  color: var(--cs-white);
+  border: none;
+  border-radius: 999px;
+  padding: 10px 16px;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.cs-dashboard-btn:hover {
+  background: var(--cs-green-dark);
+}
+
 .cs-search-box {
   display: flex;
   align-items: center;
@@ -889,7 +905,7 @@
 }
 
 .cs-product-card:hover {
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
 .cs-product-img {

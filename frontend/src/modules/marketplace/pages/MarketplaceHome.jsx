@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
-import Header from "../components/Header";
-import Footer from "../components/Footer";
+import Header from "../../shared/components/layout/Header";
+import Footer from "../../shared/components/layout/Footer";
 import ProductCard from "../components/ProductCard";
-import "../../../index.css";
+import "../../../app/index.css";
+import { getProducts } from "../services/marketplace.service";
 
 const CATEGORIES = [
   "All Products",
@@ -19,24 +20,18 @@ export default function MarketplaceHome() {
 
   // ✅ FETCH FROM BACKEND (FULLY DYNAMIC)
   useEffect(() => {
-    setLoading(true);
+  setLoading(true);
 
-    const url =
-      activeCat === "All Products"
-        ? "http://localhost:5000/api/products"
-        : `http://localhost:5000/api/products?category=${activeCat}`;
-
-    fetch(url)
-      .then((res) => res.json())
-      .then((data) => {
-        setProducts(data);
-        setLoading(false);
-      })
-      .catch((err) => {
-        console.error("Error loading products:", err);
-        setLoading(false);
-      });
-  }, [activeCat]);
+  getProducts(activeCat)
+    .then((res) => {
+      setProducts(res.data);
+      setLoading(false);
+    })
+    .catch((err) => {
+      console.error("Error loading products:", err);
+      setLoading(false);
+    });
+}, [activeCat]);
 
   if (loading) {
     return <h2 style={{ padding: "40px" }}>Loading products...</h2>;
@@ -80,7 +75,8 @@ export default function MarketplaceHome() {
 
         <div className="cs-products-grid">
           {products.map((product) => (
-            <ProductCard key={product.id} {...product} />
+            <ProductCard key={product._id} {...product} />
+
           ))}
         </div>
       </section>

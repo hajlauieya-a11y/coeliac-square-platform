@@ -1,0 +1,110 @@
+.evt-page {
+  --evt-green: #8aa05a;
+  --evt-green-dark: #6b8e3d;
+  --evt-cream: #faf6ec;
+  --evt-soft: #eef0e0;
+  --evt-text: #1f2a1a;
+  --evt-muted: #6b7a5a;
+  background: var(--evt-cream);
+  color: var(--evt-text);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  min-height: 100vh;
+}
+
+/* Header */
+.evt-header { display: flex; align-items: center; justify-content: space-between; padding: 20px 60px; }
+.evt-logo { display: flex; align-items: center; gap: 8px; }
+.evt-logo-icon { font-size: 32px; }
+.evt-logo-text { font-family: Georgia, serif; font-style: italic; color: var(--evt-green-dark); font-size: 20px; line-height: 1; }
+.evt-header-nav { display: flex; gap: 30px; }
+.evt-header-nav a { color: var(--evt-text); text-decoration: none; font-size: 14px; }
+.evt-header-icons { display: flex; align-items: center; gap: 12px; }
+.evt-icon-btn { background: none; border: none; font-size: 20px; cursor: pointer; }
+.evt-search-box { display: flex; align-items: center; gap: 8px; border: 1px solid #1f2a1a; border-radius: 4px; padding: 6px 10px; background: white; }
+.evt-search-box input { border: none; outline: none; background: transparent; font-size: 13px; width: 140px; }
+.evt-subnav { display: flex; justify-content: center; gap: 14px; padding: 8px 60px 24px; }
+.evt-subnav-item { background: var(--evt-soft); border: none; border-radius: 999px; padding: 8px 22px; font-size: 13px; cursor: pointer; color: var(--evt-text); }
+
+/* Hero list */
+.evt-hero { position: relative; margin: 0 60px; border-radius: 16px; overflow: hidden; height: 420px; background: linear-gradient(180deg, rgba(0,0,0,0.2), rgba(0,0,0,0.4)), #5a4a3a; display: flex; flex-direction: column; justify-content: flex-end; padding: 40px; color: white; }
+.evt-hero-badge { display: inline-block; background: var(--evt-green-dark); color: white; padding: 6px 14px; border-radius: 6px; font-size: 11px; letter-spacing: 1px; margin-bottom: 14px; width: fit-content; }
+.evt-hero h1 { font-size: 64px; margin: 0 0 16px; font-weight: 500; line-height: 1.05; }
+.evt-hero p { font-size: 13px; max-width: 360px; opacity: 0.9; line-height: 1.6; }
+
+/* Filters */
+.evt-filters { display: flex; justify-content: center; gap: 10px; padding: 30px 60px; }
+.evt-filter { background: var(--evt-soft); border: none; border-radius: 999px; padding: 10px 24px; font-size: 12px; cursor: pointer; letter-spacing: 1px; color: var(--evt-muted); }
+.evt-filter.active { background: var(--evt-green); color: white; }
+
+/* Featured event */
+.evt-featured { background: var(--evt-green); margin: 0 60px; border-radius: 20px; padding: 30px; display: grid; grid-template-columns: 1fr 1fr; gap: 30px; align-items: center; }
+.evt-featured-img-wrap { position: relative; }
+.evt-featured-img { background: #4a3a2a; border-radius: 14px; aspect-ratio: 4/3; }
+.evt-featured-date { position: absolute; bottom: -20px; right: -10px; background: white; padding: 14px 18px; border-radius: 12px; box-shadow: 0 4px 14px rgba(0,0,0,0.1); max-width: 200px; }
+.evt-featured-date .evt-eyebrow-mini { font-size: 9px; letter-spacing: 1px; color: var(--evt-muted); margin-bottom: 4px; }
+.evt-featured-date h4 { font-size: 16px; margin: 0 0 6px; color: var(--evt-text); }
+.evt-featured-date p { font-size: 11px; color: var(--evt-muted); margin: 0 0 8px; line-height: 1.5; }
+.evt-featured-date .evt-loc { font-size: 11px; color: var(--evt-text); }
+.evt-featured-text { color: white; padding: 10px 20px; }
+.evt-featured-text .evt-eyebrow { font-size: 11px; opacity: 0.9; margin-bottom: 14px; }
+.evt-featured-text h2 { font-family: Georgia, serif; font-size: 36px; margin: 0 0 16px; font-weight: 500; line-height: 1.15; }
+.evt-featured-text p { font-size: 13px; opacity: 0.9; line-height: 1.6; margin: 0 0 22px; }
+.evt-btn-dark { background: var(--evt-green-dark); border: none; color: white; padding: 12px 24px; border-radius: 999px; font-size: 13px; cursor: pointer; }
+
+/* Calendar grid */
+.evt-calendar { padding: 60px; }
+.evt-calendar-head { display: flex; justify-content: space-between; align-items: end; margin-bottom: 30px; }
+.evt-calendar-head h2 { font-family: Georgia, serif; font-size: 28px; margin: 0 0 6px; font-weight: 500; }
+.evt-calendar-head p { font-size: 12px; color: var(--evt-muted); margin: 0; max-width: 380px; }
+.evt-calendar-link { color: var(--evt-text); text-decoration: none; font-size: 13px; }
+.evt-calendar-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+.evt-card { background: white; border-radius: 14px; overflow: hidden; }
+.evt-card-img { aspect-ratio: 16/10; background: #ccc; position: relative; }
+.evt-card-tag { position: absolute; top: 12px; left: 12px; background: rgba(255,255,255,0.9); padding: 4px 10px; border-radius: 6px; font-size: 10px; letter-spacing: 1px; }
+.evt-card-body { padding: 16px; }
+.evt-card-body h4 { font-size: 16px; margin: 0 0 6px; }
+.evt-card-body > p { font-size: 12px; color: var(--evt-muted); margin: 0 0 12px; line-height: 1.5; }
+.evt-card-meta { display: flex; gap: 14px; font-size: 11px; color: var(--evt-muted); border-top: 1px solid #eee; padding-top: 10px; }
+
+/* Quote */
+.evt-quote { background: var(--evt-green); margin: 0 60px; border-radius: 20px; padding: 50px 30px; text-align: center; color: white; }
+.evt-quote-mark { font-size: 40px; opacity: 0.5; }
+.evt-quote p { font-family: Georgia, serif; font-size: 22px; line-height: 1.5; max-width: 640px; margin: 10px auto 24px; }
+.evt-quote-author { display: flex; flex-direction: column; align-items: center; }
+.evt-quote-avatar { width: 40px; height: 40px; border-radius: 50%; background: #d6c0a0; margin-bottom: 8px; }
+.evt-quote-author span { font-size: 11px; letter-spacing: 1px; }
+.evt-quote-author small { font-size: 10px; opacity: 0.8; margin-top: 2px; }
+
+/* Newsletter */
+.evt-newsletter { margin: 60px; border: 1px dashed #c0c8a8; border-radius: 16px; padding: 50px 30px; text-align: center; }
+.evt-newsletter h2 { font-family: Georgia, serif; font-size: 28px; color: var(--evt-green-dark); margin: 0 0 10px; font-weight: 500; }
+.evt-newsletter p { font-size: 12px; color: var(--evt-muted); margin: 0 0 24px; }
+.evt-newsletter-form { display: flex; gap: 10px; max-width: 480px; margin: 0 auto; }
+.evt-newsletter-form input { flex: 1; padding: 12px 18px; border-radius: 999px; border: none; background: var(--evt-soft); font-size: 13px; outline: none; }
+.evt-newsletter-form button { background: var(--evt-green); color: white; border: none; padding: 12px 26px; border-radius: 999px; font-size: 13px; cursor: pointer; }
+.evt-newsletter small { display: block; margin-top: 16px; font-size: 10px; color: var(--evt-muted); }
+
+/* Footer */
+.evt-footer { background: #d9e0c4; padding: 50px 60px 20px; }
+.evt-footer-grid { display: grid; grid-template-columns: 1.5fr 1fr 1fr 1fr 1.5fr; gap: 40px; }
+.evt-footer-brand p { font-size: 13px; color: var(--evt-muted); margin-top: 12px; max-width: 220px; }
+.evt-footer h5 { font-size: 15px; margin: 0 0 14px; }
+.evt-footer ul { list-style: none; padding: 0; margin: 0; }
+.evt-footer ul li { margin-bottom: 8px; }
+.evt-footer ul li a { color: #4a6a9a; text-decoration: none; font-size: 13px; }
+.evt-social { display: flex; gap: 8px; margin-bottom: 20px; }
+.evt-social a { width: 32px; height: 32px; border-radius: 50%; background: white; display: flex; align-items: center; justify-content: center; text-decoration: none; color: var(--evt-text); font-size: 13px; }
+.evt-social a:nth-child(2) { background: var(--evt-green-dark); color: white; }
+.evt-app-buttons { display: flex; gap: 8px; }
+.evt-app-btn { background: black; color: white; padding: 8px 14px; border-radius: 6px; text-decoration: none; font-size: 11px; }
+.evt-footer-bottom { text-align: center; margin-top: 40px; padding-top: 20px; font-size: 12px; color: var(--evt-muted); }
+
+@media (max-width: 1024px) {
+  .evt-featured, .evt-calendar-grid, .evt-footer-grid { grid-template-columns: 1fr; }
+  .evt-hero h1 { font-size: 40px; }
+}
+@media (max-width: 640px) {
+  .evt-header, .evt-calendar, .evt-newsletter, .evt-footer { padding-left: 20px; padding-right: 20px; }
+  .evt-hero, .evt-featured, .evt-quote { margin-left: 20px; margin-right: 20px; }
+  .evt-newsletter { margin: 30px 20px; }
+}
