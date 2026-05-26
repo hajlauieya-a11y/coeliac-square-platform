@@ -96,6 +96,26 @@
 .md-resource-card p { font-size: 12px; opacity: 0.9; margin: 0 0 16px; line-height: 1.5; }
 .md-resource-cta { color: white; font-size: 12px; letter-spacing: 1px; text-decoration: none; border-bottom: 1px solid white; padding-bottom: 2px; }
 
+/* Expert content */
+.md-expert-content { padding: 0 60px 60px; }
+.md-expert-heading { display: flex; justify-content: space-between; gap: 24px; align-items: end; margin-bottom: 24px; }
+.md-expert-heading h2 { margin: 0; color: var(--md-green-dark); font-size: 24px; font-weight: 500; }
+.md-expert-heading p { margin: 0; color: var(--md-muted); max-width: 360px; font-size: 13px; line-height: 1.5; }
+.md-expert-state { background: #fffdf8; border: 1px solid #e6decf; border-radius: 12px; padding: 18px; color: var(--md-muted); }
+.md-expert-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; }
+.md-expert-card { background: #fffdf8; border: 1px solid #e6decf; border-radius: 12px; padding: 22px; display: flex; flex-direction: column; gap: 12px; }
+.md-expert-meta { display: flex; justify-content: space-between; gap: 10px; color: var(--md-muted); font-size: 11px; font-weight: 800; letter-spacing: 1px; text-transform: uppercase; }
+.md-expert-card h3 { margin: 0; color: var(--md-text); font-size: 18px; }
+.md-expert-card p { margin: 0; color: var(--md-muted); font-size: 13px; line-height: 1.6; }
+.md-expert-summary { color: var(--md-text) !important; font-weight: 700; }
+.md-expert-link { color: var(--md-green-dark); font-size: 13px; font-weight: 800; text-decoration: none; width: fit-content; border-bottom: 1px solid var(--md-green-dark); padding-bottom: 2px; }
+.md-expert-author { border-top: 1px solid #e6decf; display: flex; gap: 12px; align-items: flex-start; margin-top: auto; padding-top: 14px; }
+.md-expert-author img { width: 46px; height: 46px; border-radius: 50%; object-fit: cover; background: var(--md-soft); }
+.md-expert-author strong, .md-expert-author span { display: block; }
+.md-expert-author strong { color: var(--md-text); font-size: 14px; }
+.md-expert-author span { color: var(--md-green-dark); font-size: 12px; font-weight: 800; margin-top: 2px; }
+.md-expert-author p { margin-top: 6px; font-size: 12px; }
+
 /* Footer */
 .md-footer { background: #d9e0c4; padding: 50px 60px 20px; }
 .md-footer-grid { display: grid; grid-template-columns: 1.5fr 1fr 1fr 1fr 1.5fr; gap: 40px; }
@@ -112,12 +132,13 @@
 .md-footer-bottom { text-align: center; margin-top: 40px; padding-top: 20px; font-size: 12px; color: var(--md-muted); }
 
 @media (max-width: 1024px) {
-  .md-hero, .md-symptoms-grid, .md-diagnosis, .md-dining, .md-immune, .md-resources-grid, .md-footer-grid {
+  .md-hero, .md-symptoms-grid, .md-diagnosis, .md-dining, .md-immune, .md-resources-grid, .md-expert-grid, .md-footer-grid {
     grid-template-columns: 1fr;
   }
+  .md-expert-heading { align-items: start; flex-direction: column; }
   .md-clarity { padding: 40px 30px; }
 }
 @media (max-width: 640px) {
-  .md-header, .md-hero, .md-symptoms, .md-immune, .md-video, .md-resources, .md-footer { padding-left: 20px; padding-right: 20px; }
+  .md-header, .md-hero, .md-symptoms, .md-immune, .md-video, .md-resources, .md-expert-content, .md-footer { padding-left: 20px; padding-right: 20px; }
   .md-hero-text h1 { font-size: 32px; }
 }

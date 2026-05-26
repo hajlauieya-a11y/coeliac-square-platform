@@ -1,0 +1,61 @@
+.cs-toast {
+  position: fixed;
+  top: 22px;
+  right: 22px;
+  z-index: 9999;
+  width: min(360px, calc(100vw - 32px));
+  background: white;
+  border: 1px solid #e5e2d6;
+  border-left: 6px solid #6b8e3d;
+  border-radius: 12px;
+  box-shadow: 0 16px 42px rgba(31, 31, 31, 0.16);
+  padding: 16px 42px 16px 16px;
+  color: #1f1f1f;
+  animation: cs-toast-in 0.18s ease-out;
+}
+
+.cs-toast strong {
+  display: block;
+  margin-bottom: 4px;
+  color: #24351d;
+}
+
+.cs-toast p {
+  margin: 0;
+  color: #6b6b6b;
+  font-size: 14px;
+  line-height: 1.4;
+}
+
+.cs-toast-error {
+  border-left-color: #a04436;
+}
+
+.cs-toast-error strong {
+  color: #8d2f22;
+}
+
+.cs-toast-close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 24px;
+  height: 24px;
+  border: 0;
+  border-radius: 50%;
+  background: #f3f0e8;
+  color: #555;
+  cursor: pointer;
+  font-weight: 700;
+}
+
+@keyframes cs-toast-in {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

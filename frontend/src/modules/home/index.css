@@ -98,6 +98,9 @@
   text-decoration: none;
   font-size: 14px;
   font-weight: 500;
+  background: transparent;
+  border: 0;
+  cursor: pointer;
 }
 
 /* ===== FOOTER ===== */
@@ -297,6 +300,9 @@
   color: var(--cs-green);
   text-decoration: none;
   font-weight: 500;
+  background: transparent;
+  border: 0;
+  cursor: pointer;
 }
 
 /* ===== DISEASE ===== */
@@ -461,11 +467,21 @@
 
 .hp-boutique-card {
   background: var(--cs-white);
+  border: 0;
   border-radius: 12px;
   padding: 14px;
   display: flex;
   gap: 12px;
   align-items: center;
+  color: inherit;
+  cursor: pointer;
+  text-align: left;
+  width: 100%;
+}
+
+.hp-boutique-card:hover,
+.hp-recipe-card:hover {
+  transform: translateY(-2px);
 }
 
 .hp-boutique-card-img {
@@ -473,6 +489,8 @@
   height: 70px;
   border-radius: 8px;
   background: #ddd;
+  background-size: cover;
+  background-position: center;
   flex-shrink: 0;
 }
 
@@ -562,19 +580,28 @@
 
 .hp-recipe-feature-img {
   background: #c97b5a;
+  background-size: cover;
+  background-position: center;
 }
 
 .hp-recipe-card {
   background: var(--cs-white);
+  border: 0;
   border-radius: 16px;
   overflow: hidden;
   display: flex;
   flex-direction: column;
+  color: inherit;
+  cursor: pointer;
+  text-align: left;
+  transition: transform 0.2s;
 }
 
 .hp-recipe-card-img {
   height: 130px;
   background: #c97b5a;
+  background-size: cover;
+  background-position: center;
 }
 
 .hp-recipe-card-info {
@@ -656,7 +683,19 @@
 
 .hp-workshop-img {
   background: linear-gradient(135deg, #4a4a3a, #2a2a1a);
+  background-size: cover;
+  background-position: center;
   min-height: 400px;
+}
+
+.hp-empty-state {
+  background: rgba(255, 255, 255, 0.72);
+  border: 1px solid var(--cs-border);
+  border-radius: 14px;
+  color: var(--cs-text-muted);
+  font-size: 14px;
+  line-height: 1.5;
+  padding: 18px;
 }
 
 /* ===== FAQ ===== */
@@ -774,4 +813,45 @@
   .hp-hero-title { font-size: 38px; }
   .hp-video-text h2 { font-size: 26px; }
   .hp-video-overlay { padding: 24px; flex-direction: column; gap: 20px; align-items: flex-start; }
+  .hp-section-head {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .hp-hero-actions,
+  .hp-boutique-promo {
+    align-items: stretch;
+    flex-direction: column;
+  }
+  .hp-hero-quote {
+    left: 16px;
+    max-width: calc(100% - 32px);
+  }
+}
+
+@media (max-width: 560px) {
+  .hp-hero,
+  .hp-services,
+  .hp-disease,
+  .hp-video,
+  .hp-boutique,
+  .hp-recipes,
+  .hp-workshop,
+  .hp-faq {
+    margin-left: 0;
+    margin-right: 0;
+    border-radius: 0;
+  }
+
+  .hp-hero-title {
+    font-size: 32px;
+  }
+
+  .hp-boutique-feature {
+    height: 300px;
+  }
+
+  .hp-workshop-info {
+    padding: 30px 22px;
+  }
 }

@@ -29,7 +29,7 @@ export const getProducts = async (req, res) => {
   try {
     const { category } = req.query;
 
-    const filter = { isActive: true };
+    const filter = { isActive: true, stock: { $gt: 0 } };
 
     if (category && category !== "All Products") {
       filter.category = category;

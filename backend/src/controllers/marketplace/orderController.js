@@ -1,6 +1,18 @@
 import Cart from "../../models/Cart.js";
 import Order from "../../models/Order.js";
 
+const getVendorSectionStatus = (items) => {
+  if (items.some((item) => item.vendorStatus === "refused")) {
+    return "refused";
+  }
+
+  if (items.length > 0 && items.every((item) => item.vendorStatus === "confirmed")) {
+    return "confirmed";
+  }
+
+  return "pending";
+};
+
 export const createOrder = async (req, res) => {
   try {
     const { contact, shippingAddress, deliveryMethod } = req.body;
@@ -13,6 +25,18 @@ export const createOrder = async (req, res) => {
 
     if (!cart || cart.items.length === 0) {
       return res.status(400).json({ message: "Cart is empty" });
+    }
+
+    for (const item of cart.items) {
+      if (!item.product || !item.product.isActive) {
+        return res.status(400).json({ message: "One product in your cart is no longer available" });
+      }
+
+      if (item.qty > item.product.stock) {
+        return res.status(400).json({
+          message: `${item.product.name} only has ${item.product.stock} item(s) left`
+        });
+      }
     }
 
     const orderItems = cart.items.map((item) => ({
@@ -45,6 +69,11 @@ export const createOrder = async (req, res) => {
       total
     });
 
+    for (const item of cart.items) {
+      item.product.stock -= item.qty;
+      await item.product.save();
+    }
+
     cart.items = [];
     await cart.save();
 
@@ -56,8 +85,34 @@ export const createOrder = async (req, res) => {
 
 export const getMyOrders = async (req, res) => {
   try {
-    const orders = await Order.find({ user: req.user._id }).sort({ createdAt: -1 });
-    res.json(orders);
+    const orders = await Order.find({ user: req.user._id }).sort({ createdAt: -1 }).lean();
+
+    const formattedOrders = orders.map((order) => {
+      const sellerGroups = {};
+
+      order.items.forEach((item) => {
+        const sellerKey = item.seller?.toString() || "unknown";
+
+        if (!sellerGroups[sellerKey]) {
+          sellerGroups[sellerKey] = [];
+        }
+
+        sellerGroups[sellerKey].push(item);
+      });
+
+      const vendorSections = Object.entries(sellerGroups).map(([seller, items]) => ({
+        seller,
+        status: getVendorSectionStatus(items),
+        items
+      }));
+
+      return {
+        ...order,
+        vendorSections
+      };
+    });
+
+    res.json(formattedOrders);
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
@@ -99,7 +154,8 @@ export const getVendorOrders = async (req, res) => {
       return {
         ...order,
         items,
-        vendorSubtotal
+        vendorSubtotal,
+        vendorSectionStatus: getVendorSectionStatus(items)
       };
     });
 

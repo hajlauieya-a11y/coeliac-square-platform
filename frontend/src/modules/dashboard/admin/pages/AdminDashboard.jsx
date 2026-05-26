@@ -22,6 +22,38 @@ export default function AdminDashboard() {
         </div>
 
         <section className="dashboard-card dashboard-menu">
+          <Link to="/admin/events" className="dashboard-menu-item">
+            <div>
+              <h2>Manage Events</h2>
+              <p>Create events, update details, and inspect secured tickets.</p>
+            </div>
+            <span>Open</span>
+          </Link>
+
+          <Link to="/admin/events/new" className="dashboard-menu-item">
+            <div>
+              <h2>Add Event</h2>
+              <p>Create an event with capacity, date, price, and ticket reservations.</p>
+            </div>
+            <span>Open</span>
+          </Link>
+
+          <Link to="/admin/users" className="dashboard-menu-item">
+            <div>
+              <h2>Users & Role Requests</h2>
+              <p>Confirm requested roles and manage permissions for experts, vendors, and formateurs.</p>
+            </div>
+            <span>Open</span>
+          </Link>
+
+          <Link to="/admin/recipes" className="dashboard-menu-item">
+            <div>
+              <h2>Manage Recipes</h2>
+              <p>View, edit, or delete recipes from the public library.</p>
+            </div>
+            <span>Open</span>
+          </Link>
+
           <Link to="/admin/recipes/new" className="dashboard-menu-item">
             <div>
               <h2>Add Recipe</h2>

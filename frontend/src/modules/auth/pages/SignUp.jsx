@@ -12,6 +12,7 @@ export default function SignUp() {
     name: "",      // Changed from username to name (matches backend)
     email: "",
     password: "",
+    role: "user",
   });
 
   const [error, setError] = useState("");
@@ -31,7 +32,7 @@ export default function SignUp() {
 
     try {
       await signup(form);
-      navigate("/auth");           // or "/welcome" or "/home"
+      navigate("/home");
     } catch (err) {
       setError(err.response?.data?.message || "Signup failed. Please try again.");
     } finally {
@@ -81,6 +82,19 @@ export default function SignUp() {
               onChange={onChange}
               required
             />
+
+            <select className="auth-input" name="role" value={form.role} onChange={onChange}>
+              <option value="user">Patient / Visitor</option>
+              <option value="expert">Expert / Nutritionist</option>
+              <option value="vendor">Vendor</option>
+              <option value="formateur">Formateur</option>
+            </select>
+
+            {form.role !== "user" && (
+              <p className="auth-note">
+                Your account will stay as a regular user until an admin confirms this role.
+              </p>
+            )}
 
             {error && <p className="auth-error">{error}</p>}
 

@@ -1,4 +1,5 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
+import { useToast } from "../../shared/components/ui/ToastContext";
 import {
   getCart,
   addCartItem,
@@ -21,6 +22,7 @@ const normalizeCart = (backendCart) => {
 export function CartProvider({ children }) {
   const [cart, setCart] = useState([]);
   const [cartLoading, setCartLoading] = useState(true);
+  const { showToast } = useToast();
 
   useEffect(() => {
   const token = localStorage.getItem("token");
@@ -48,12 +50,29 @@ export function CartProvider({ children }) {
   const token = localStorage.getItem("token");
 
   if (!token) {
-    alert("Please sign in before adding items to your cart.");
+    showToast({
+      title: "Sign in required",
+      message: "Please sign in before adding items to your cart.",
+      type: "error",
+    });
     return;
   }
 
-  const res = await addCartItem(product._id, qty);
-  setCart(normalizeCart(res.data));
+  try {
+    const res = await addCartItem(product._id, qty);
+    setCart(normalizeCart(res.data));
+    showToast({
+      title: "Product added",
+      message: `${product.name} was added to your cart.`,
+      type: "success",
+    });
+  } catch (err) {
+    showToast({
+      title: "Could not add product",
+      message: err.response?.data?.message || "Please try again.",
+      type: "error",
+    });
+  }
 };
 
 

@@ -20,8 +20,25 @@ const userSchema = new mongoose.Schema({
   },
   role: {
     type: String,
-    enum: ['user', 'vendor', 'admin'],
+    enum: ['user', 'vendor', 'formateur', 'expert', 'admin'],
     default: 'user'
+  },
+  requestedRole: {
+    type: String,
+    enum: ['vendor', 'formateur', 'expert', ''],
+    default: ''
+  },
+  roleRequestStatus: {
+    type: String,
+    enum: ['none', 'pending', 'approved', 'rejected'],
+    default: 'none'
+  },
+  expertProfile: {
+    specialty: { type: String, default: '' },
+    bio: { type: String, default: '' },
+    phone: { type: String, default: '' },
+    image: { type: String, default: '' },
+    location: { type: String, default: '' }
   }
 }, { timestamps: true });
 

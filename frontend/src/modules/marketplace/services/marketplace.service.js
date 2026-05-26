@@ -57,3 +57,7 @@ export const clearBackendCart = () => {
 export const createOrder = (orderData) => {
   return API.post("/marketplace/orders", orderData);
 };
+
+export const getMyOrders = () => {
+  return API.get("/marketplace/orders/me");
+};

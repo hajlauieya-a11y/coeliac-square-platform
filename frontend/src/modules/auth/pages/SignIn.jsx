@@ -31,10 +31,7 @@ export default function SignIn() {
 
     try {
       await signin(form);
-
-      // redirect after successful login
       navigate("/home");
-
     } catch (err) {
       setError(
         err.response?.data?.message ||

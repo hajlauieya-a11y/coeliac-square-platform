@@ -16,3 +16,98 @@
   width: 18px;
   height: 18px;
 }
+
+.dashboard-ticket-list {
+  grid-column: 1 / -1;
+  display: grid;
+  gap: 8px;
+  border-top: 1px solid #eee7da;
+  padding-top: 14px;
+}
+
+.admin-role-section {
+  display: grid;
+  gap: 16px;
+  margin-bottom: 22px;
+}
+
+.admin-role-section h2 {
+  color: #24351d;
+  font-size: 22px;
+  margin: 0;
+}
+
+.admin-user-list {
+  display: grid;
+  gap: 14px;
+}
+
+.admin-user-row {
+  align-items: center;
+  background: #fffdf8;
+  border: 1px solid #eee7da;
+  border-radius: 12px;
+  display: grid;
+  gap: 18px;
+  grid-template-columns: minmax(0, 1fr) auto;
+  padding: 18px;
+}
+
+.admin-user-row h3 {
+  color: #24351d;
+  font-size: 18px;
+  margin: 0 0 6px;
+}
+
+.admin-user-row p {
+  color: #6b6b6b;
+  margin: 0 0 10px;
+}
+
+.admin-role-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.admin-role-tags span {
+  background: #e8eed8;
+  border-radius: 999px;
+  color: #385221;
+  font-size: 12px;
+  font-weight: 800;
+  padding: 6px 10px;
+  text-transform: capitalize;
+}
+
+.admin-role-select {
+  background: #fffdf8;
+  border: 1px solid #d8d0bf;
+  border-radius: 999px;
+  color: #24351d;
+  font: inherit;
+  font-weight: 700;
+  min-width: 160px;
+  padding: 12px 16px;
+}
+
+.dashboard-ticket-row {
+  display: grid;
+  grid-template-columns: 1fr 1.3fr 1.2fr auto;
+  gap: 12px;
+  align-items: center;
+  background: #fff;
+  border: 1px solid #eee7da;
+  border-radius: 10px;
+  padding: 10px 12px;
+}
+
+@media (max-width: 720px) {
+  .dashboard-ticket-row {
+    grid-template-columns: 1fr;
+  }
+
+  .admin-user-row {
+    grid-template-columns: 1fr;
+  }
+}

@@ -1,81 +1,228 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useEffect, useState } from "react";
 import Header from "../../shared/components/layout/Header";
 import Footer from "../../shared/components/layout/Footer";
+import {
+  getEvents,
+  getFeaturedEvent,
+  reserveEventTicket,
+} from "../services/event.service";
+import { useToast } from "../../shared/components/ui/ToastContext";
 import "../index.css";
 
-const filters = ["TOUS", "CUISINE", "MÉDICAL", "BIEN-ÊTRE", "CONFÉRENCES"];
-
-const events = [
-  { id: "diner-gala", tag: "GOURMET", title: "Dîner de Gala Automnal", desc: "Une soirée gastronomique 100% sans gluten orchestrée par des chefs étoilés au profit de la...", meta: ["📅 18.11.24", "📍 Paris"] },
-  { id: "retraite-yoga", tag: "BIEN-ÊTRE", title: "Retraite Yoga & Nutrition", desc: "Un week-end pour reconnecter son corps et son alimentation. Ateliers nutritionnels et séances de...", meta: ["📅 02.12.24", "📍 Annecy"] },
-  { id: "webinaire-microbiote", tag: "MÉDICAL", title: "Webinaire: Microbiote & Coeliaque", desc: "Comprendre les dernières avancées scientifiques sur le rôle du microbiote dans la maladie coeliaque.", meta: ["🎓 En ligne", "🕐 19h00"] },
+const filters = [
+  { label: "TOUS", value: "TOUS" },
+  { label: "CUISINE", value: "CUISINE" },
+  { label: "MEDICAL", value: "MEDICAL" },
+  { label: "BIEN-ETRE", value: "BIEN-ETRE" },
+  { label: "CONFERENCES", value: "CONFERENCES" },
 ];
 
+const formatDate = (date) =>
+  new Date(date).toLocaleDateString("fr-FR", {
+    day: "2-digit",
+    month: "long",
+    year: "numeric",
+  });
+
+const formatTime = (date) =>
+  new Date(date).toLocaleTimeString("fr-FR", {
+    hour: "2-digit",
+    minute: "2-digit",
+  });
+
 export default function Event() {
+  const [events, setEvents] = useState([]);
+  const [featuredEvent, setFeaturedEvent] = useState(null);
+  const [activeFilter, setActiveFilter] = useState("TOUS");
+  const [loading, setLoading] = useState(true);
+  const [message, setMessage] = useState("");
+  const [error, setError] = useState("");
+  const { showToast } = useToast();
+
+  useEffect(() => {
+    setLoading(true);
+
+    getEvents({ category: activeFilter })
+      .then((res) => {
+        setEvents(res.data);
+        setLoading(false);
+      })
+      .catch((err) => {
+        setError(err.response?.data?.message || "Could not load events.");
+        setLoading(false);
+      });
+  }, [activeFilter]);
+
+  useEffect(() => {
+    getFeaturedEvent()
+      .then((res) => setFeaturedEvent(res.data))
+      .catch(() => setFeaturedEvent(null));
+  }, []);
+
+  const handleReserve = async (eventId) => {
+    setMessage("");
+    setError("");
+
+    try {
+      const res = await reserveEventTicket(eventId);
+      const successMessage = `Ticket code: ${res.data.ticketCode}`;
+      setMessage(`Ticket reserved. ${successMessage}`);
+      showToast({
+        title: "Ticket reserved",
+        message: successMessage,
+        type: "success",
+      });
+
+      const refreshed = await getEvents({ category: activeFilter });
+      setEvents(refreshed.data);
+
+      if (featuredEvent?._id === eventId) {
+        const featured = await getFeaturedEvent();
+        setFeaturedEvent(featured.data);
+      }
+    } catch (err) {
+      const errorMessage = err.response?.data?.message || "Could not reserve ticket.";
+      setError(errorMessage);
+      showToast({
+        title: "Reservation failed",
+        message: errorMessage,
+        type: "error",
+      });
+    }
+  };
+
+  const heroEvent = featuredEvent || events[0];
+
   return (
     <div className="evt-page">
       <Header />
 
       <section className="evt-hero">
-        <span className="evt-hero-badge">SAISON 2024</span>
-        <h1>Expériences &<br />Ateliers</h1>
-        <p>L'art de vivre sans compromis. Rejoignez notre cercle de passionnés pour des moments d'apprentissage et de partage d'exception.</p>
+        <span className="evt-hero-badge">SAISON 2026</span>
+        <h1>Experiences &<br />Ateliers</h1>
+        <p>
+          L'art de vivre sans compromis. Rejoignez notre cercle de passionnes pour
+          des moments d'apprentissage et de partage d'exception.
+        </p>
       </section>
 
       <div className="evt-filters">
-        {filters.map((f, i) => (
-          <button key={f} className={`evt-filter ${i === 0 ? "active" : ""}`}>{f}</button>
+        {filters.map((filter) => (
+          <button
+            key={filter.value}
+            className={`evt-filter ${activeFilter === filter.value ? "active" : ""}`}
+            onClick={() => setActiveFilter(filter.value)}
+          >
+            {filter.label}
+          </button>
         ))}
       </div>
 
-      <section className="evt-featured">
-        <div className="evt-featured-img-wrap">
-          <div className="evt-featured-img" />
-          <div className="evt-featured-date">
-            <div className="evt-eyebrow-mini">PROCHAIN ÉVÉNEMENT</div>
-            <h4>12 Octobre, 2024</h4>
-            <p>Un voyage sensoriel au cœur de la boulangerie traditionnelle, réinventée sans gluten.</p>
-            <div className="evt-loc">📍 Paris, Studio Gastronomique</div>
+      {message && <div className="evt-message success">{message}</div>}
+      {error && <div className="evt-message error">{error}</div>}
+
+      {heroEvent && (
+        <section className="evt-featured">
+          <div className="evt-featured-img-wrap">
+            <div
+              className="evt-featured-img"
+              style={
+                heroEvent.image
+                  ? {
+                      backgroundImage: `url(${heroEvent.image})`,
+                      backgroundSize: "cover",
+                      backgroundPosition: "center",
+                    }
+                  : undefined
+              }
+            />
+            <div className="evt-featured-date">
+              <div className="evt-eyebrow-mini">PROCHAIN EVENEMENT</div>
+              <h4>{formatDate(heroEvent.startsAt)}</h4>
+              <p>{heroEvent.description}</p>
+              <div className="evt-loc">
+                {heroEvent.isOnline ? "En ligne" : heroEvent.location}
+              </div>
+            </div>
           </div>
-        </div>
-        <div className="evt-featured-text">
-          <div className="evt-eyebrow">— Masterclass Premium</div>
-          <h2>Masterclass<br />de Boulangerie<br />Sans Gluten</h2>
-          <p>Découvrez les secrets des farines alternatives avec notre chef invité. Apprenez à maîtriser l'élasticité, la complexité parfaite et les saveurs authentiques du pain de campagne sans gluten. Un atelier immersif limité à 8 participants pour une attention personnalisée.</p>
-          <Link to="/workshop/$workshopId" params={{ workshopId: "boulangerie" }}>
-            <button className="evt-btn-dark">Réserver ma place →</button>
-          </Link>
-        </div>
-      </section>
+
+          <div className="evt-featured-text">
+            <div className="evt-eyebrow">- {heroEvent.tag || heroEvent.category}</div>
+            <h2>{heroEvent.title}</h2>
+            <p>{heroEvent.description}</p>
+            <p>
+              {heroEvent.availableSeats} place{heroEvent.availableSeats === 1 ? "" : "s"} disponible
+              {heroEvent.availableSeats === 1 ? "" : "s"}
+            </p>
+            <button
+              className="evt-btn-dark"
+              disabled={heroEvent.isSoldOut}
+              onClick={() => handleReserve(heroEvent._id)}
+            >
+              {heroEvent.isSoldOut ? "Complet" : "Reserver ma place"}
+            </button>
+          </div>
+        </section>
+      )}
 
       <section className="evt-calendar">
         <div className="evt-calendar-head">
           <div>
-            <h2>Calendrier des Événements</h2>
-            <p>Explorez nos prochaines retraites, dîners et conférences exclusives.</p>
+            <h2>Calendrier des Evenements</h2>
+            <p>Explorez nos prochaines retraites, diners et conferences exclusives.</p>
           </div>
-          <a href="#" className="evt-calendar-link">Tout voir →</a>
         </div>
-        <div className="evt-calendar-grid">
-          {events.map((e) => (
-            <Link key={e.id} to="/workshop/$workshopId" params={{ workshopId: e.id }} className="evt-card-link">
-              <div className="evt-card">
-                <div className="evt-card-img"><span className="evt-card-tag">{e.tag}</span></div>
+
+        {loading ? (
+          <p>Loading events...</p>
+        ) : events.length === 0 ? (
+          <p>No events found.</p>
+        ) : (
+          <div className="evt-calendar-grid">
+            {events.map((event) => (
+              <div key={event._id} className="evt-card">
+                <div
+                  className="evt-card-img"
+                  style={
+                    event.image
+                      ? {
+                          backgroundImage: `url(${event.image})`,
+                          backgroundSize: "cover",
+                          backgroundPosition: "center",
+                        }
+                      : undefined
+                  }
+                >
+                  <span className="evt-card-tag">{event.tag || event.category}</span>
+                </div>
                 <div className="evt-card-body">
-                  <h4>{e.title}</h4>
-                  <p>{e.desc}</p>
-                  <div className="evt-card-meta">{e.meta.map((m, i) => <span key={i}>{m}</span>)}</div>
+                  <h4>{event.title}</h4>
+                  <p>{event.description}</p>
+                  <div className="evt-card-meta">
+                    <span>{formatDate(event.startsAt)}</span>
+                    <span>{formatTime(event.startsAt)}</span>
+                    <span>{event.isOnline ? "En ligne" : event.location}</span>
+                  </div>
+                  <button
+                    className="evt-card-btn"
+                    disabled={event.isSoldOut}
+                    onClick={() => handleReserve(event._id)}
+                  >
+                    {event.isSoldOut ? "Complet" : "Reserver"}
+                  </button>
                 </div>
               </div>
-            </Link>
-          ))}
-        </div>
+            ))}
+          </div>
+        )}
       </section>
 
       <section className="evt-quote">
         <div className="evt-quote-mark">"</div>
-        <p>"Ces ateliers ne sont pas seulement des cours de cuisine, ce sont des moments où l'on cesse de se sentir différent pour simplement savourer l'instant."</p>
+        <p>
+          "Ces ateliers ne sont pas seulement des cours de cuisine, ce sont des moments
+          ou l'on cesse de se sentir different pour simplement savourer l'instant."
+        </p>
         <div className="evt-quote-author">
           <div className="evt-quote-avatar" />
           <span>SONIA NASRI</span>
@@ -84,13 +231,13 @@ export default function Event() {
       </section>
 
       <section className="evt-newsletter">
-        <h2>Ne manquez aucun<br />événement</h2>
-        <p>Soyez les premiers informés de nos prochains ateliers, conférences et masterclasses privées.</p>
+        <h2>Ne manquez aucun<br />evenement</h2>
+        <p>Soyez les premiers informes de nos prochains ateliers, conferences et masterclasses privees.</p>
         <form className="evt-newsletter-form" onSubmit={(e) => e.preventDefault()}>
           <input type="email" placeholder="votre@email.com" />
           <button type="submit">S'inscrire</button>
         </form>
-        <small>EN VOUS INSCRIVANT VOUS ACCEPTEZ NOTRE POLITIQUE DE CONFIDENTIALITÉ</small>
+        <small>EN VOUS INSCRIVANT VOUS ACCEPTEZ NOTRE POLITIQUE DE CONFIDENTIALITE</small>
       </section>
 
       <Footer />

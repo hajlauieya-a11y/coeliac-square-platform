@@ -1,0 +1,137 @@
+.tickets-page {
+  background: #faf6ec;
+  min-height: 70vh;
+  padding: 48px 20px;
+}
+
+.tickets-shell {
+  max-width: 980px;
+  margin: 0 auto;
+}
+
+.tickets-head {
+  margin-bottom: 28px;
+}
+
+.tickets-head span {
+  color: #6b8e3d;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 1.1px;
+  text-transform: uppercase;
+}
+
+.tickets-head h1 {
+  margin: 8px 0;
+  color: #1f2a1a;
+  font-size: 36px;
+}
+
+.tickets-head p,
+.tickets-empty p,
+.ticket-card p {
+  color: #6b7a5a;
+  line-height: 1.5;
+}
+
+.tickets-message,
+.tickets-empty,
+.ticket-card {
+  background: white;
+  border: 1px solid #e5e2d6;
+  border-radius: 14px;
+  padding: 24px;
+}
+
+.tickets-message.error {
+  color: #8d2f22;
+  background: #f8e3df;
+  margin-bottom: 16px;
+}
+
+.tickets-grid {
+  display: grid;
+  gap: 18px;
+}
+
+.ticket-card {
+  box-shadow: 0 8px 26px rgba(31, 42, 26, 0.06);
+}
+
+.ticket-card-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 18px;
+}
+
+.ticket-card-top strong {
+  font-family: "Courier New", monospace;
+  color: #1f2a1a;
+  background: #eef0e0;
+  border-radius: 10px;
+  padding: 8px 10px;
+  word-break: break-word;
+}
+
+.ticket-card h2 {
+  margin: 0 0 8px;
+  color: #1f2a1a;
+  font-size: 22px;
+}
+
+.ticket-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  border-top: 1px solid #eee;
+  margin-top: 16px;
+  padding-top: 14px;
+}
+
+.ticket-meta span,
+.ticket-status {
+  background: #e8eed8;
+  color: #385221;
+  border-radius: 999px;
+  padding: 7px 10px;
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.ticket-cancel-btn {
+  margin-top: 18px;
+  border: 0;
+  border-radius: 999px;
+  background: #f8e3df;
+  color: #8d2f22;
+  cursor: pointer;
+  font-weight: 800;
+  padding: 11px 18px;
+}
+
+.ticket-cancel-btn:hover {
+  background: #f3d1ca;
+}
+
+.ticket-status {
+  text-transform: capitalize;
+}
+
+.ticket-status-cancelled {
+  background: #f8e3df;
+  color: #8d2f22;
+}
+
+.ticket-status-checked_in {
+  background: #e0edf8;
+  color: #245b86;
+}
+
+@media (max-width: 640px) {
+  .ticket-card-top {
+    align-items: stretch;
+    flex-direction: column;
+  }
+}

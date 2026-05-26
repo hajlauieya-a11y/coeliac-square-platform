@@ -135,6 +135,13 @@
   cursor: pointer;
 }
 
+.auth-note {
+  color: var(--auth-green-dark);
+  font-size: 0.86rem;
+  line-height: 1.45;
+  margin: -0.25rem 0 0;
+}
+
 .auth-btn {
   width: 100%;
   padding: 1rem 1.5rem;

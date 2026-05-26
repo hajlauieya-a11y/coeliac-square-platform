@@ -1,0 +1,221 @@
+.cq-header {
+  background: #fcfbf8;
+  border-bottom: 1px solid #e5e2d6;
+  color: #1f1f1f;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  position: relative;
+  z-index: 20;
+}
+
+.cq-mainbar {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 30px;
+  padding: 18px 60px;
+}
+
+.cq-logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+  color: #6b8e3d;
+  text-align: left;
+}
+
+.cq-logo-mark {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: #d9e3c4;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+}
+
+.cq-logo strong {
+  display: block;
+  font-family: Georgia, serif;
+  font-style: italic;
+  font-size: 20px;
+  line-height: 1;
+}
+
+.cq-topnav {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 32px;
+}
+
+.cq-topnav a {
+  color: #1f1f1f;
+  text-decoration: none;
+  font-size: 14px;
+}
+
+.cq-subnav {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  padding: 8px 60px 22px;
+}
+
+.cq-nav-group {
+  position: relative;
+}
+
+.cq-nav-trigger {
+  background: #e8eed8;
+  border: 0;
+  color: #1f1f1f;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 600;
+  padding: 10px 22px;
+  border-radius: 24px;
+}
+
+.cq-nav-trigger::after {
+  content: " v";
+  color: #6b8e3d;
+  font-size: 11px;
+}
+
+.cq-dropdown {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  min-width: 230px;
+  display: none;
+  flex-direction: column;
+  gap: 4px;
+  background: #fff;
+  border: 1px solid #e5e2d6;
+  border-radius: 10px;
+  box-shadow: 0 16px 40px rgba(31, 31, 31, 0.12);
+  padding: 10px;
+}
+
+.cq-nav-group:hover .cq-dropdown,
+.cq-nav-group:focus-within .cq-dropdown {
+  display: flex;
+}
+
+.cq-dropdown a {
+  color: #1f1f1f;
+  text-decoration: none;
+  border-radius: 8px;
+  padding: 10px 12px;
+  font-size: 14px;
+}
+
+.cq-dropdown a:hover {
+  background: #e8eed8;
+  color: #385221;
+}
+
+.cq-header-actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+.cq-dashboard-btn,
+.cq-icon-btn {
+  border: 0;
+  border-radius: 999px;
+  cursor: pointer;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.cq-dashboard-btn {
+  background: #6b8e3d;
+  color: #fff;
+  padding: 10px 16px;
+}
+
+.cq-icon-btn {
+  background: #e8eed8;
+  color: #385221;
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  font-size: 19px;
+}
+
+.cq-search-box {
+  display: flex;
+  align-items: center;
+  border: 1px solid #1f1f1f;
+  border-radius: 6px;
+  padding: 8px 12px;
+  width: 220px;
+  background: #fff;
+}
+
+.cq-search-box input {
+  border: none;
+  outline: none;
+  flex: 1;
+  font-size: 13px;
+  background: transparent;
+}
+
+@media (max-width: 920px) {
+  .cq-mainbar {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+
+  .cq-mainbar {
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+
+  .cq-topnav,
+  .cq-subnav {
+    justify-content: flex-start;
+  }
+
+  .cq-subnav {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+
+  .cq-dropdown {
+    position: static;
+    box-shadow: none;
+    margin-top: 4px;
+  }
+
+  .cq-nav-group:hover .cq-dropdown,
+  .cq-nav-group:focus-within .cq-dropdown {
+    display: flex;
+  }
+
+  .cq-header-actions {
+    justify-content: flex-start;
+    flex-wrap: wrap;
+  }
+}
+
+@media (max-width: 640px) {
+  .cq-topnav,
+  .cq-header-actions {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .cq-search-box {
+    width: 100%;
+  }
+}

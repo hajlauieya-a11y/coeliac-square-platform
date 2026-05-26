@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Header from "../../shared/components/layout/Header";
 import Footer from "../../shared/components/layout/Footer";
+import { getPublishedExpertContent } from "../../dashboard/expert/services/expert.service";
 import "../index.css";
 
 const RESOURCES = [
@@ -10,6 +11,22 @@ const RESOURCES = [
 ];
 
 export default function Maladie() {
+  const [expertContent, setExpertContent] = useState([]);
+  const [expertLoading, setExpertLoading] = useState(true);
+  const [expertError, setExpertError] = useState("");
+
+  useEffect(() => {
+    getPublishedExpertContent()
+      .then((res) => {
+        setExpertContent(res.data);
+        setExpertLoading(false);
+      })
+      .catch(() => {
+        setExpertError("Le contenu des experts sera disponible bientot.");
+        setExpertLoading(false);
+      });
+  }, []);
+
   return (
     <div className="md-page">
       <Header />
@@ -102,6 +119,57 @@ export default function Maladie() {
       <section className="md-video">
         <div className="md-video-img" />
         <button className="md-play" aria-label="Play">▶</button>
+      </section>
+
+      {/* EXPERT CONTENT */}
+      <section className="md-expert-content">
+        <div className="md-expert-heading">
+          <div>
+            <div className="md-eyebrow">AVIS DES EXPERTS</div>
+            <h2>Articles, videos et conseils nutritionnels</h2>
+          </div>
+          <p>Les contenus publies par les experts apparaissent ici automatiquement.</p>
+        </div>
+
+        {expertLoading && <p className="md-expert-state">Chargement du contenu...</p>}
+        {expertError && <p className="md-expert-state">{expertError}</p>}
+        {!expertLoading && !expertError && expertContent.length === 0 && (
+          <p className="md-expert-state">Aucun contenu expert publie pour le moment.</p>
+        )}
+
+        {expertContent.length > 0 && (
+          <div className="md-expert-grid">
+            {expertContent.map((content) => (
+              <article key={content._id} className="md-expert-card">
+                <div className="md-expert-meta">
+                  <span>{content.type}</span>
+                  {content.createdAt && <span>{new Date(content.createdAt).toLocaleDateString()}</span>}
+                </div>
+
+                <h3>{content.title}</h3>
+                <p className="md-expert-summary">{content.summary}</p>
+                <p>{content.body}</p>
+
+                {content.mediaUrl && (
+                  <a href={content.mediaUrl} target="_blank" rel="noreferrer" className="md-expert-link">
+                    Ouvrir la ressource
+                  </a>
+                )}
+
+                <footer className="md-expert-author">
+                  {content.expert?.expertProfile?.image && (
+                    <img src={content.expert.expertProfile.image} alt={content.expert.name} />
+                  )}
+                  <div>
+                    <strong>{content.expert?.name}</strong>
+                    <span>{content.expert?.expertProfile?.specialty || "Expert"}</span>
+                    {content.expert?.expertProfile?.bio && <p>{content.expert.expertProfile.bio}</p>}
+                  </div>
+                </footer>
+              </article>
+            ))}
+          </div>
+        )}
       </section>
 
       {/* RESOURCES */}

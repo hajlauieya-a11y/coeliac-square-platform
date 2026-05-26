@@ -1,0 +1,140 @@
+.orders-page {
+  background: #f7f4ec;
+  min-height: 70vh;
+  padding: 44px 20px;
+}
+
+.orders-shell {
+  max-width: 980px;
+  margin: 0 auto;
+}
+
+.orders-head {
+  margin-bottom: 26px;
+}
+
+.orders-head span {
+  color: #6b8e3d;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 1.1px;
+  text-transform: uppercase;
+}
+
+.orders-head h1 {
+  margin: 8px 0 0;
+  color: #24351d;
+  font-size: 34px;
+}
+
+.orders-empty,
+.order-card,
+.orders-error {
+  background: white;
+  border: 1px solid #e7dfcf;
+  border-radius: 14px;
+  padding: 24px;
+}
+
+.orders-error {
+  color: #8d2f22;
+  background: #f8e3df;
+  margin-bottom: 16px;
+}
+
+.orders-list {
+  display: grid;
+  gap: 18px;
+}
+
+.order-card-head {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  margin-bottom: 18px;
+}
+
+.order-card-head h2 {
+  margin: 0 0 6px;
+  color: #24351d;
+  font-size: 20px;
+}
+
+.order-card-head p {
+  margin: 0;
+  color: #6b6b6b;
+}
+
+.order-card-head strong {
+  color: #24351d;
+  font-size: 20px;
+}
+
+.order-sections {
+  display: grid;
+  gap: 14px;
+}
+
+.order-vendor-section {
+  border: 1px solid #eee7da;
+  border-radius: 12px;
+  padding: 16px;
+  background: #fffdf8;
+}
+
+.order-vendor-head,
+.order-item {
+  display: flex;
+  justify-content: space-between;
+  gap: 14px;
+  align-items: center;
+}
+
+.order-vendor-head {
+  margin-bottom: 10px;
+}
+
+.order-vendor-head span {
+  color: #6b6b6b;
+  font-size: 13px;
+}
+
+.order-item {
+  border-top: 1px solid #eee7da;
+  padding: 10px 0;
+}
+
+.order-item:last-child {
+  padding-bottom: 0;
+}
+
+.order-status {
+  border-radius: 999px;
+  padding: 6px 10px;
+  font-size: 12px;
+  text-transform: capitalize;
+}
+
+.order-status-pending {
+  background: #fff0c7;
+  color: #83620d;
+}
+
+.order-status-confirmed {
+  background: #e8eed8;
+  color: #2c501d;
+}
+
+.order-status-refused {
+  background: #f8e3df;
+  color: #8d2f22;
+}
+
+@media (max-width: 720px) {
+  .order-card-head,
+  .order-vendor-head,
+  .order-item {
+    align-items: stretch;
+    flex-direction: column;
+  }
+}

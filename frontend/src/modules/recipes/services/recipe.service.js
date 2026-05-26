@@ -25,3 +25,11 @@ export const getRecipeById = (id) => {
 export const createRecipe = (recipeData) => {
   return API.post("/recipes", recipeData);
 };
+
+export const updateRecipe = (id, recipeData) => {
+  return API.patch(`/recipes/${id}`, recipeData);
+};
+
+export const deleteRecipe = (id) => {
+  return API.delete(`/recipes/${id}`);
+};
